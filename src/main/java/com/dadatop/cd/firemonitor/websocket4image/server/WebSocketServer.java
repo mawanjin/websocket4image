@@ -25,13 +25,7 @@ public class WebSocketServer {
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
 
-    private static ApplicationContext applicationContext;
     private HttpAPIService httpAPIService;
-
-    public static void setApplicationContext(ApplicationContext applicationContext) {
-        WebSocketServer.applicationContext = applicationContext;
-    }
-
 
     /**
      * 连接建立成功调用的方法
@@ -67,9 +61,7 @@ public class WebSocketServer {
         System.out.println("来自客户端的消息:" + message);
         String str = "";
         try {
-//            httpAPIService = applicationContext.getBean(HttpAPIService.class);
             httpAPIService = (HttpAPIService) ApplicationContextRegister.getApplicationContext() .getBean("httpAPIService");
-//            str = httpAPIService.doGet("https://www.baidu.com/img/superlogo_c4d7df0a003d3db9b65e9ef0fe6da1ec.png");
             str = httpAPIService.doGet(message);
         } catch (Exception e) {
             e.printStackTrace();
