@@ -1,1 +1,9 @@
 package -DskipTests
+
+打包时，pom.xml下面的要打开。开发时，注释掉
+<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+            <!--打包时，打开下面的注释-->
+            <!--<scope>provided</scope>-->
+</dependency>
