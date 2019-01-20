@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dadatop.cd.firemonitor.websocket4image.dao.PushDao" >
+    <resultMap id="BaseResultMap" type="com.dadatop.cd.firemonitor.websocket4image.entity.Push" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+        <result column="original_name" property="originalName" jdbcType="VARCHAR" />
+        <result column="ab_path" property="abPath" jdbcType="VARCHAR" />
+        <result column="upload_time" property="uploadTime" jdbcType="VARCHAR" />
+        <result column="push_time" property="pushTime" jdbcType="VARCHAR" />
+        <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+
+    </resultMap>
+
+    <select id="findAllByStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from push_t
+        where status = #{status,jdbcType=INTEGER}
+    </select>
+
+    <sql id="Base_Column_List" >
+        id, file_name,ab_path,upload_time,push_time,update_time,original_name,status
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from push_t
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from push_t
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.dadatop.cd.firemonitor.websocket4image.entity.Push" >
+        insert into push_t (id, file_name,original_name,ab_path,upload_time,push_time,update_time,status )
+        values (#{id,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR},#{originalName,jdbcType=VARCHAR}, #{abPath,jdbcType=VARCHAR}, #{uploadTime,jdbcType=VARCHAR}, #{pushTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.dadatop.cd.firemonitor.websocket4image.entity.Push" >
+        insert into push_t
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="fileName != null" >
+                file_name,
+            </if>
+
+            <if test="originalName != null" >
+                original_name,
+            </if>
+
+            <if test="abPath != null" >
+                ab_path,
+            </if>
+
+            <if test="uploadTime != null" >
+                upload_time,
+            </if>
+
+            <if test="pushTime != null" >
+                push_time,
+            </if>
+
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+
+            <if test="status != null" >
+                status
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="fileName != null" >
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+
+            <if test="originalName != null" >
+                #{originalName,jdbcType=VARCHAR},
+            </if>
+
+            <if test="abPath != null" >
+                #{abPath,jdbcType=VARCHAR},
+            </if>
+
+            <if test="uploadTime != null" >
+                #{uploadTime,jdbcType=VARCHAR},
+            </if>
+
+            <if test="pushTime != null" >
+                #{pushTime,jdbcType=VARCHAR},
+            </if>
+
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=VARCHAR},
+            </if>
+
+            <if test="updateTime != null" >
+                #{status,jdbcType=VARCHAR}
+            </if>
+
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dadatop.cd.firemonitor.websocket4image.entity.Push" >
+        update push_t
+        <set >
+            <if test="fileName != null" >
+                name = #{file_name,jdbcType=VARCHAR},
+            </if>
+
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dadatop.cd.firemonitor.websocket4image.entity.Push" >
+        update push_t
+        set name = #{fileName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

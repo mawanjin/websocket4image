@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>推送列表</title>
+</head>
+<body>
+<div>
+
+    <TABLE>
+        <tr>
+            <th>编号</th>
+            <th>文件名</th>
+            <th>上传时间</th>
+        </tr>
+
+        <tr th:each="push:${pushes}">
+            <td th:text="${push.id}"></td>
+            <td th:text="${push.originalName}"></td>
+            <!--<td th:text="${#dates.format(push.uploadTime,'yyyy-MM-dd HH:mm:ss')}"></td>-->
+            <td th:text="${#dates.format(push.uploadTime,'yyyy-MM-dd')}"></td>
+        </tr>
+    </TABLE>
+
+</div>
+</body>
+</html>
