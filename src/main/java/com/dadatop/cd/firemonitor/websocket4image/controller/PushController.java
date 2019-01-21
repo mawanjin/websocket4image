@@ -95,6 +95,9 @@ public class PushController {
         return "redirect:list";
     }
 
-
+    @RequestMapping("config")
+    public String  config(Model model) {
+        return "/push/config";
+    }
 
 }
