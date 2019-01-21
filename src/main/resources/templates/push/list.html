@@ -34,16 +34,14 @@
                 }
             });
 
-            $('#mutilDel').bind('click',function(){
-                var ids='';
-                $("input[name=box]").each(function(){
-                    if($(this).prop('checked')){
-                        ids+=$(this).val()+",";
-                    }
-                });
 
-                var val = $("#txtPageSize").val();
-                window.location = "/push/del_multi?pageNo=1&pageSize="+val+"&ids="+ids;
+
+            $('#btnConfirmDel').bind('click',function(){
+                if(del_type==0){
+                    del(del_id);
+                }else {
+                    delMutil();
+                }
             });
 
         });
@@ -51,6 +49,25 @@
         function del(id) {
             var val = $("#txtPageSize").val();
             window.location = "/push/del?pageNo=1&pageSize="+val+"&id="+id;
+        }
+
+        var del_type,del_id;
+
+        function preDel(type,id) {
+            del_type = type;
+            del_id = id;
+        }
+
+        function delMutil() {
+            var ids='';
+            $("input[name=box]").each(function(){
+                if($(this).prop('checked')){
+                    ids+=$(this).val()+",";
+                }
+            });
+
+            var val = $("#txtPageSize").val();
+            window.location = "/push/del_multi?pageNo=1&pageSize="+val+"&ids="+ids;
         }
 
         
@@ -75,9 +92,6 @@
 </div>
 
 
-
-
-
 <div class="container">
     <div class="row">
         <div class="col-1">
@@ -85,7 +99,7 @@
         </div>
         <div class="col-10">
 
-            <button id="mutilDel" type="button" class="btn btn-danger">删除</button>
+            <button id="mutilDel" type="button" class="btn btn-danger" data-toggle="modal" data-target=".bd-example-modal-sm" th:onclick="'javascript:preDel(1,-1)'" >删除</button>
             <table class="table table-hover table-striped ">
                 <thead >
                 <tr class="bg-success">
@@ -113,7 +127,7 @@
 
                     <!--<td th:if="${push.pushTime}" th:text="${#dates.format(push.pushTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
                     <!--<td th:unless="${push.pushTime}" th:text="-"></td>-->
-                    <td><button type="button" class="btn btn-info">推送</button> &nbsp;&nbsp;<button type="button" class="btn btn-danger" th:onclick="'javascript:del('+${push.id}+')'" >删除</button></td>
+                    <td><button type="button" class="btn btn-info">推送</button> &nbsp;&nbsp;<button type="button" data-toggle="modal" data-target=".bd-example-modal-sm" class="btn btn-danger" th:onclick="'javascript:preDel(0,'+${push.id}+')'"  >删除</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -136,6 +150,24 @@
     </div>
 </div>
 
-
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">提示</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>确定要删除吗?</p>
+            </div>
+            <div class="modal-footer">
+                <button id="btnConfirmDel" type="button" class="btn btn-primary">删除</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

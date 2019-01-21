@@ -22,7 +22,7 @@
     <select id="findAllPage" parameterType="map"  resultMap="BaseResultMap" >
         select
         <include refid="Base_Column_List" />
-        from push_t limit #{currIndex} , #{pageSize}
+        from push_t limit #{currIndex} , #{pageSize} ORDER BY upload_time DESC
     </select>
 
     <select id="findAllCount" parameterType="map"  resultType="int" >
