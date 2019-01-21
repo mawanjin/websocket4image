@@ -24,9 +24,10 @@ public class PushController {
     }
 
     @RequestMapping("list")
-    public String  pushList(Model model,Page param) {
+    public String  pushList(Model model,Page param,String message) {
         Page<Push> page = pushService.findAllPage(param.getPageNo(),param.getPageSize());
         model.addAttribute("page",page);
+        model.addAttribute("message",message);
         return "/push/list";
     }
 
@@ -35,6 +36,7 @@ public class PushController {
         pushService.del(id);
         attributes.addAttribute("pageNo",page.getPageNo());
         attributes.addAttribute("pageSize",page.getPageSize());
+        attributes.addAttribute("message","操作成功");
         return "redirect:list";
     }
 
@@ -50,6 +52,7 @@ public class PushController {
 
         attributes.addAttribute("pageNo",page.getPageNo());
         attributes.addAttribute("pageSize",page.getPageSize());
+        attributes.addAttribute("message","操作成功");
         return "redirect:list";
     }
 
