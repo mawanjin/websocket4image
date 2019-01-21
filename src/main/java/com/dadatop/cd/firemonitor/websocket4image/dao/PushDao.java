@@ -22,4 +22,5 @@ public interface PushDao {
     List<Push> findAll();
     List<Push> findAllPage(Map<String, Object> map);
     int findAllCount();
+
 }

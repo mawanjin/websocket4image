@@ -55,5 +55,10 @@ public class PushServiceImpl implements PushService {
         return page;
     }
 
+    @Override
+    public void del(int id) {
+        pushDao.deleteByPrimaryKey(id);
+    }
+
 
 }

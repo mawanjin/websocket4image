@@ -12,4 +12,6 @@ public interface PushService {
     List<Push> findAllByStatus(int status);
     List<Push> findAll();
     Page findAllPage(int currPage, int pageSize);
+
+    void del(int id);
 }
