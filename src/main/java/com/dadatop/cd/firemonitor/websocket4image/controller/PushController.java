@@ -30,7 +30,8 @@ public class PushController {
 
     @RequestMapping("")
     public String  pushIndex(Model model) {
-        return "/push";
+//        return "/push";
+        return "push";
     }
 
     @RequestMapping("list")
@@ -38,7 +39,8 @@ public class PushController {
         Page<Push> page = pushService.findAllPage(param.getPageNo(),param.getPageSize());
         model.addAttribute("page",page);
         model.addAttribute("message",message);
-        return "/push/list";
+//        return "/push/list";
+        return "push/list";
     }
 
     @RequestMapping("del")
@@ -113,7 +115,8 @@ public class PushController {
         configService.deleteAll();
         configService.insert(config);
         model.addAttribute("message","操作成功");
-        return "/push/config";
+//        return "/push/config";
+        return "push/config";
     }
 
     @RequestMapping(value = "getconfig",produces = {"application/xml;charset=UTF-8"})
