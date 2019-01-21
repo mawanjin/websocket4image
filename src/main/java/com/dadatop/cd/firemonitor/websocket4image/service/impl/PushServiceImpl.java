@@ -60,5 +60,10 @@ public class PushServiceImpl implements PushService {
         pushDao.deleteByPrimaryKey(id);
     }
 
+    @Override
+    public void updateByPrimaryKeySelective(Push p) {
+        pushDao.updateByPrimaryKeySelective(p);
+    }
+
 
 }

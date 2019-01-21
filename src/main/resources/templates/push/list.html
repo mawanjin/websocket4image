@@ -70,6 +70,12 @@
             window.location = "/push/del_multi?pageNo=1&pageSize="+val+"&ids="+ids;
         }
 
+        function push(id) {
+            var val = $("#txtPageSize").val();
+            window.location = "/push/dopush?pageNo=1&pageSize="+val+"&id="+id;
+        }
+
+
         
     </script>
 
@@ -132,7 +138,7 @@
 
                     <!--<td th:if="${push.pushTime}" th:text="${#dates.format(push.pushTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
                     <!--<td th:unless="${push.pushTime}" th:text="-"></td>-->
-                    <td><button type="button" class="btn btn-info">推送</button> &nbsp;&nbsp;<button type="button" data-toggle="modal" data-target=".bd-example-modal-sm" class="btn btn-danger" th:onclick="'javascript:preDel(0,'+${push.id}+')'"  >删除</button></td>
+                    <td><button type="button" class="btn btn-info" th:onclick="'javascript:push('+${push.id}+')'" >推送</button> &nbsp;&nbsp;<button type="button" data-toggle="modal" data-target=".bd-example-modal-sm" class="btn btn-danger" th:onclick="'javascript:preDel(0,'+${push.id}+')'"  >删除</button></td>
                 </tr>
                 </tbody>
             </table>

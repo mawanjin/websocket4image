@@ -14,4 +14,6 @@ public interface PushService {
     Page findAllPage(int currPage, int pageSize);
 
     void del(int id);
+
+    void updateByPrimaryKeySelective(Push p);
 }

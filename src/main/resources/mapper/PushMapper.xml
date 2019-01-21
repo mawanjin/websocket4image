@@ -126,9 +126,16 @@
         update push_t
         <set >
             <if test="fileName != null" >
-                name = #{file_name,jdbcType=VARCHAR},
+                file_name = #{fileName,jdbcType=VARCHAR},
             </if>
 
+            <if test="pushTime != null" >
+                push_time = #{pushTime,jdbcType=TIMESTAMP},
+            </if>
+
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
