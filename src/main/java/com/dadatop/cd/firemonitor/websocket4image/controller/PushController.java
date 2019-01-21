@@ -10,11 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/push")
@@ -114,6 +116,15 @@ public class PushController {
         return "/push/config";
     }
 
-
+    @RequestMapping(value = "getconfig",produces = {"application/xml;charset=UTF-8"})
+    @ResponseBody
+    public String  getConfig(Model model) {
+        List<Config> configs = configService.findAll();
+        if(configs!=null && configs.size()>0){
+            Config c = configs.get(0);
+            return "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><data><idle>"+c.getIdle()+"</idle><idletime>"+c.getIdletime()+"</idletime><load>"+c.getCload()+"</load><path>"+c.getPath()+"</path><size>"+c.getCsize()+"</size></data>";
+        }
+        return "<data><idle>90</idle><idletime>5</idletime><load>1</load><path>images/</path><size>80</size></data>";
+    }
 
 }
