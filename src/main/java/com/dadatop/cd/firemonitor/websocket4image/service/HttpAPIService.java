@@ -47,8 +47,8 @@ public class HttpAPIService {
 
         String picType = url.substring(url.lastIndexOf(".")+1,url.length());
         String fileName = UUID.randomUUID().toString().replace("-", "")+"."+picType;
-        String path = "/Users/wanjinma/文档/pic/"+fileName;
-//        String path = "D:\\images\\"+fileName;
+//        String path = "/Users/wanjinma/文档/pic/"+fileName;
+        String path = "D:\\images\\"+fileName;
         File storeFile = null;
         storeFile = new File(path);
         FileOutputStream output;

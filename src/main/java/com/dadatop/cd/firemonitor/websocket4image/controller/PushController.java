@@ -62,7 +62,8 @@ public class PushController {
     @RequestMapping("dopush")
     public String doPush(@RequestParam(name = "id")int id,Page page,RedirectAttributes attributes){
         String message = "操作成功";
-        String path = "/Users/lala/Documents/workspace/aa/";
+//        String path = "/Users/lala/Documents/workspace/aa/";
+        String path = "D:\\images\\";
         Push p = pushService.getPushById(id);
         if(p!=null){
             path += p.getFileName();
