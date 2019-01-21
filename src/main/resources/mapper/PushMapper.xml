@@ -6,9 +6,9 @@
         <result column="file_name" property="fileName" jdbcType="VARCHAR" />
         <result column="original_name" property="originalName" jdbcType="VARCHAR" />
         <result column="ab_path" property="abPath" jdbcType="VARCHAR" />
-        <result column="upload_time" property="uploadTime" jdbcType="VARCHAR" />
-        <result column="push_time" property="pushTime" jdbcType="VARCHAR" />
-        <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+        <result column="upload_time" property="uploadTime" jdbcType="TIMESTAMP" />
+        <result column="push_time" property="pushTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
         <result column="status" property="status" jdbcType="INTEGER" />
 
     </resultMap>
@@ -35,7 +35,7 @@
     </delete>
     <insert id="insert" parameterType="com.dadatop.cd.firemonitor.websocket4image.entity.Push" >
         insert into push_t (id, file_name,original_name,ab_path,upload_time,push_time,update_time,status )
-        values (#{id,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR},#{originalName,jdbcType=VARCHAR}, #{abPath,jdbcType=VARCHAR}, #{uploadTime,jdbcType=VARCHAR}, #{pushTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+        values (#{id,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR},#{originalName,jdbcType=VARCHAR}, #{abPath,jdbcType=VARCHAR}, #{uploadTime,jdbcType=TIMESTAMP}, #{pushTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
     </insert>
     <insert id="insertSelective" parameterType="com.dadatop.cd.firemonitor.websocket4image.entity.Push" >
         insert into push_t
@@ -89,7 +89,7 @@
             </if>
 
             <if test="uploadTime != null" >
-                #{uploadTime,jdbcType=VARCHAR},
+                #{uploadTime,jdbcType=TIMESTAMP},
             </if>
 
             <if test="pushTime != null" >

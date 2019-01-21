@@ -1,13 +1,15 @@
 package com.dadatop.cd.firemonitor.websocket4image.entity;
 
+import java.util.Date;
+
 public class Push {
     private Integer id;
     private String fileName;
     private String originalName;
     private String abPath;
-    private String uploadTime;
-    private String pushTime;
-    private String updateTime;
+    private Date uploadTime;
+    private Date pushTime;
+    private Date updateTime;
     private int status;
 
     public Integer getId() {
@@ -42,27 +44,27 @@ public class Push {
         this.abPath = abPath;
     }
 
-    public String getUploadTime() {
+    public Date getUploadTime() {
         return uploadTime;
     }
 
-    public void setUploadTime(String uploadTime) {
+    public void setUploadTime(Date uploadTime) {
         this.uploadTime = uploadTime;
     }
 
-    public String getPushTime() {
+    public Date getPushTime() {
         return pushTime;
     }
 
-    public void setPushTime(String pushTime) {
+    public void setPushTime(Date pushTime) {
         this.pushTime = pushTime;
     }
 
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
 

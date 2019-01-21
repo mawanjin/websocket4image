@@ -57,7 +57,7 @@ public class UploadController {
         push.setOriginalName(oFileName);
         push.setFileName(newName);
         push.setAbPath(file.getAbsolutePath());
-        String now = DateUtils.createNow().getTimeInMillis()+"";
+        Date now = new Date();
         push.setUploadTime(now);
         push.setUpdateTime(now);
 
