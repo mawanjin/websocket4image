@@ -72,7 +72,7 @@
 
         function push(id) {
             var val = $("#txtPageSize").val();
-            window.location = "/push/dopush?pageNo=1&pageSize="+val+"&id="+id;
+            window.location = "/push/dopush?pageNo="+[[${page.pageNo}]]+"&pageSize="+val+"&id="+id;
         }
 
 
@@ -150,7 +150,7 @@
                         <li class="page-item" th:unless="${page.first}"><a class="page-link" th:href='@{/push/list(pageNo=${page.pageNo-1},pageSize=${page.pageSize})}'   >上一页</a></li>
                         <li class="page-item" th:unless="${page.last}"><a class="page-link" th:href='@{/push/list(pageNo=${page.pageNo+1},pageSize=${page.pageSize})}'>下一页</a></li>
                         <li><span style="margin-left: 10px;">&nbsp;</span></li>
-                        <li class="page-item"><a class="page-link" href="#">共<span th:text="${page.totalPage}" /> 页</a></li>
+                        <li class="page-item"><a class="page-link" href="#">第<span th:text="${page.pageNo}+'/'+${page.totalPage}+'页'" /></a></li>
                     </ul>
                 </nav>
 
