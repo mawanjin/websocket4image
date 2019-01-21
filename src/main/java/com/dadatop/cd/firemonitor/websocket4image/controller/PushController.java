@@ -1,6 +1,8 @@
 package com.dadatop.cd.firemonitor.websocket4image.controller;
 
+import com.dadatop.cd.firemonitor.websocket4image.entity.Config;
 import com.dadatop.cd.firemonitor.websocket4image.entity.Push;
+import com.dadatop.cd.firemonitor.websocket4image.service.ConfigService;
 import com.dadatop.cd.firemonitor.websocket4image.service.PushService;
 import com.dadatop.cd.firemonitor.websocket4image.util.FileUtil;
 import com.dadatop.cd.firemonitor.websocket4image.util.Page;
@@ -20,6 +22,9 @@ public class PushController {
 
     @Resource
     private PushService pushService;
+
+    @Resource
+    private ConfigService configService;
 
     @RequestMapping("")
     public String  pushIndex(Model model) {
@@ -99,5 +104,16 @@ public class PushController {
     public String  config(Model model) {
         return "/push/config";
     }
+
+    @RequestMapping("doconfig")
+    public String  doConfig(Model model,Config config) {
+//        config.setId(1);
+        configService.deleteAll();
+        configService.insert(config);
+        model.addAttribute("message","操作成功");
+        return "/push/config";
+    }
+
+
 
 }

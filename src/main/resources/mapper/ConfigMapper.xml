@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dadatop.cd.firemonitor.websocket4image.dao.ConfigDao" >
+    <resultMap id="BaseResultMap" type="com.dadatop.cd.firemonitor.websocket4image.entity.Config" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="idle" property="idle" jdbcType="INTEGER" />
+        <result column="idletime" property="idletime" jdbcType="INTEGER" />
+        <result column="cload" property="cload" jdbcType="INTEGER" />
+        <result column="path" property="path" jdbcType="VARCHAR" />
+        <result column="csize" property="csize" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id,idle,idletime,cload,path,csize
+    </sql>
+
+    <select id="findAll" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from config_t
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select
+        <include refid="Base_Column_List" />
+        from config_t
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from config_t
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteAll" >
+        delete from config_t
+    </delete>
+
+    <insert id="insert" parameterType="com.dadatop.cd.firemonitor.websocket4image.entity.Config" >
+        insert into config_t (id, idle,idletime,cload,path,csize)
+        values (#{id,jdbcType=INTEGER}, #{idle,jdbcType=INTEGER},#{idletime,jdbcType=INTEGER}, #{cload,jdbcType=INTEGER}, #{path,jdbcType=VARCHAR}, #{csize,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.dadatop.cd.firemonitor.websocket4image.entity.Config" >
+        insert into config_t
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="idle != null" >
+                idle,
+            </if>
+
+            <if test="idletime != null" >
+                idletime,
+            </if>
+
+            <if test="cload != null" >
+                cload,
+            </if>
+
+            <if test="path != null" >
+                path
+            </if>
+
+            <if test="csize != null" >
+                csize
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="idle != null" >
+                #{idle,jdbcType=INTEGER},
+            </if>
+
+            <if test="idletime != null" >
+                #{idletime,jdbcType=INTEGER},
+            </if>
+
+            <if test="cload != null" >
+                #{cload,jdbcType=INTEGER},
+            </if>
+
+            <if test="path != null" >
+                #{path,jdbcType=VARCHAR},
+            </if>
+
+            <if test="csize != null" >
+                #{csize,jdbcType=INTEGER}
+            </if>
+
+
+
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dadatop.cd.firemonitor.websocket4image.entity.Config" >
+        update config_t
+        <set >
+            <if test="idle != null" >
+                idle = #{idle,jdbcType=INTEGER},
+            </if>
+
+            <if test="idletime != null" >
+                idletime = #{idletime,jdbcType=INTEGER},
+            </if>
+
+            <if test="cload != null" >
+                cload = #{cload,jdbcType=INTEGER},
+            </if>
+
+            <if test="path != null" >
+                path = #{path,jdbcType=VARCHAR},
+            </if>
+
+            <if test="csize != null" >
+                csize = #{csize,jdbcType=INTEGER}
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dadatop.cd.firemonitor.websocket4image.entity.Config" >
+        update config_t
+        set idle = #{idle,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
