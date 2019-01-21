@@ -7,6 +7,35 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#cb_all").change(function(){
+                var c = $(this).is(':checked');
+                $("input[name=box]").each(function(){
+                    if(c){
+                        $(this).prop('checked',true);
+                    }else {
+                        $(this).prop('checked',false);
+                    }
+                });
+            });
+
+            $("#txtPageSize").keyup(function(){
+                if(event.keyCode == 13){
+                    var val = $("#txtPageSize").val();
+                    var ival = parseInt(val);
+
+                    if(!isNaN(ival)){
+                        window.location = "/push/list?pageNo=1&pageSize="+val;
+                    } else{
+                        alert("不是数字");
+                    }
+                }
+            });
+
+        });
+    </script>
 </head>
 <body>
 
@@ -23,6 +52,7 @@
             <table class="table table-hover table-striped ">
                 <thead >
                 <tr class="bg-success">
+                    <th scope="col"><input id="cb_all" type="checkbox"></th>
                     <th scope="col">#</th>
                     <th scope="col">文件名</th>
                     <th scope="col">上传时间</th>
@@ -30,27 +60,38 @@
                     <th scope="col">操作</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr th:each="push:${pushes}">
-                    <th scope="row" th:text="${push.id}"></th>
+                <tbody >
+                <tr th:each="push:${page.data}">
+                    <th scope="row">
+                        <input name="box" type="checkbox" value="${push.id}" >
+                    </th>
+                    <th  th:text="${push.id}"></th>
                     <td th:text="${push.originalName}"></td>
-                    <!--<td th:text="${#dates.format(push.uploadTime,'yyyy-MM-dd')}"></td>-->
-                    <td th:text="${#dates.format(push.uploadTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                    <td th:text="${push.pushTime}"></td>
-                    <td>删除</td>
-                </tr>
 
+                    <td th:if="${push.uploadTime}" th:text="${#dates.format(push.uploadTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:unless="${push.uploadTime}" th:text="-"></td>
+
+                    <td th:if="${push.pushTime}" th:text="${#dates.format(push.pushTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:unless="${push.pushTime}" th:text="'-'"></td>
+
+                    <!--<td th:if="${push.pushTime}" th:text="${#dates.format(push.pushTime, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+                    <!--<td th:unless="${push.pushTime}" th:text="-"></td>-->
+                    <td><button type="button" class="btn btn-info">推送</button> &nbsp;&nbsp;<button type="button" class="btn btn-danger">删除</button></td>
+                </tr>
                 </tbody>
             </table>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
+
+                <nav aria-label="Page navigation  ">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item"><a class="page-link" href="#">每页<input id="txtPageSize" type="text" style="width: 30px"  th:value="${page.pageSize}">  条</a></li>
+                        <li><span style="margin-left: 10px;">&nbsp;</span></li>
+                        <li class="page-item" th:unless="${page.first}"><a class="page-link" th:href='@{/push/list(pageNo=${page.pageNo-1},pageSize=${page.pageSize})}'   >上一页</a></li>
+                        <li class="page-item" th:unless="${page.last}"><a class="page-link" th:href='@{/push/list(pageNo=${page.pageNo+1},pageSize=${page.pageSize})}'>下一页</a></li>
+                        <li><span style="margin-left: 10px;">&nbsp;</span></li>
+                        <li class="page-item"><a class="page-link" href="#">共<span th:text="${page.totalPage}" /> 页</a></li>
+                    </ul>
+                </nav>
+
         </div>
         <div class="col-1">
 
@@ -58,21 +99,6 @@
     </div>
 </div>
 
-
-    <!--<TABLE>-->
-        <!--<tr>-->
-            <!--<th>编号</th>-->
-            <!--<th>文件名</th>-->
-            <!--<th>上传时间</th>-->
-        <!--</tr>-->
-
-        <!--<tr th:each="push:${pushes}">-->
-            <!--<td th:text="${push.id}"></td>-->
-            <!--<td th:text="${push.originalName}"></td>-->
-            <!--&lt;!&ndash;<td th:text="${#dates.format(push.uploadTime,'yyyy-MM-dd HH:mm:ss')}"></td>&ndash;&gt;-->
-            <!--<td th:text="${#dates.format(push.uploadTime,'yyyy-MM-dd')}"></td>-->
-        <!--</tr>-->
-    <!--</TABLE>-->
 
 </body>
 </html>

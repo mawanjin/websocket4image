@@ -13,6 +13,22 @@
 
     </resultMap>
 
+    <select id="findAll" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from push_t
+    </select>
+
+    <select id="findAllPage" parameterType="map"  resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from push_t limit #{currIndex} , #{pageSize}
+    </select>
+
+    <select id="findAllCount" parameterType="map"  resultType="int" >
+        select count(*) from push_t;
+    </select>
+
     <select id="findAllByStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
         select
         <include refid="Base_Column_List" />
@@ -100,8 +116,8 @@
                 #{updateTime,jdbcType=VARCHAR},
             </if>
 
-            <if test="updateTime != null" >
-                #{status,jdbcType=VARCHAR}
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER}
             </if>
 
         </trim>

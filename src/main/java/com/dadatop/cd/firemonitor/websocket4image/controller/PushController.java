@@ -2,12 +2,12 @@ package com.dadatop.cd.firemonitor.websocket4image.controller;
 
 import com.dadatop.cd.firemonitor.websocket4image.entity.Push;
 import com.dadatop.cd.firemonitor.websocket4image.service.PushService;
+import com.dadatop.cd.firemonitor.websocket4image.util.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Controller
 @RequestMapping("/push")
@@ -22,10 +22,11 @@ public class PushController {
     }
 
     @RequestMapping("list")
-    public String  pushList(Model model) {
-        List<Push> pushes = pushService.findAllByStatus(0);
+    public String  pushList(Model model,Page param) {
 
-        model.addAttribute("pushes",pushes);
+        Page<Push> page = pushService.findAllPage(param.getPageNo(),param.getPageSize());
+
+        model.addAttribute("page",page);
 
         return "/push/list";
     }
