@@ -21,6 +21,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/push")
 public class PushController {
+    boolean dev = false;
 
     @Resource
     private PushService pushService;
@@ -30,7 +31,9 @@ public class PushController {
 
     @RequestMapping("")
     public String  pushIndex(Model model) {
-//        return "/push";
+        if(dev){
+         return "/push";
+        }
         return "push";
     }
 
@@ -39,7 +42,10 @@ public class PushController {
         Page<Push> page = pushService.findAllPage(param.getPageNo(),param.getPageSize());
         model.addAttribute("page",page);
         model.addAttribute("message",message);
-//        return "/push/list";
+        if(dev){
+            return "/push/list";
+        }
+
         return "push/list";
     }
 
@@ -106,7 +112,10 @@ public class PushController {
 
     @RequestMapping("config")
     public String  config(Model model) {
-        return "/push/config";
+        if(dev){
+            return "/push/config";
+        }
+        return "push/config";
     }
 
     @RequestMapping("doconfig")
@@ -115,18 +124,26 @@ public class PushController {
         configService.deleteAll();
         configService.insert(config);
         model.addAttribute("message","操作成功");
-//        return "/push/config";
+        if(dev){
+            return "/push/config";
+        }
+
         return "push/config";
     }
 
     @RequestMapping(value = "getconfig",produces = {"application/xml;charset=UTF-8"})
     @ResponseBody
     public String  getConfig(Model model) {
-        List<Config> configs = configService.findAll();
-        if(configs!=null && configs.size()>0){
-            Config c = configs.get(0);
-            return "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><data><idle>"+c.getIdle()+"</idle><idletime>"+c.getIdletime()+"</idletime><load>"+c.getCload()+"</load><path>"+c.getPath()+"</path><size>"+c.getCsize()+"</size></data>";
+        try {
+            List<Config> configs = configService.findAll();
+            if(configs!=null && configs.size()>0){
+                Config c = configs.get(0);
+                return "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><data><idle>"+c.getIdle()+"</idle><idletime>"+c.getIdletime()+"</idletime><load>"+c.getCload()+"</load><path>"+c.getPath()+"</path><size>"+c.getCsize()+"</size></data>";
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
         return "<data><idle>90</idle><idletime>5</idletime><load>1</load><path>images/</path><size>80</size></data>";
     }
 
