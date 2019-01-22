@@ -60,6 +60,7 @@ public class UploadController {
         Date now = new Date();
         push.setUploadTime(now);
         push.setUpdateTime(now);
+        push.setPushTime(now);
 
         pushService.addPush(push);
 

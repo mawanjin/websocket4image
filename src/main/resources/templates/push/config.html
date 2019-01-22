@@ -11,6 +11,22 @@
     <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
     <script src="../jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="../layer/layer.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#btnPic").bind('click',function(){
+                window.location = "/push/";
+            });
+
+            $("#btnPushList").bind('click',function(){
+                window.location = "/push/list";
+            });
+
+            $("#btnConfig").bind('click',function(){
+                window.location = "/push/config";
+            });
+        });
+    </script>
 </head>
 <body>
 
@@ -29,6 +45,9 @@
     </div>
 </div>
 
+
+
+
 <div style="margin-left: 300px;margin-top: 100px;">
 <blockquote class="layui-elem-quote layui-text">
     配置文件
@@ -39,7 +58,7 @@
 </fieldset>
 
 
-<form class="layui-form" action="/push/doconfig">
+<form class="layui-form" action="/push/doconfig" lay-filter="demo1">
 
     <div class="layui-form-item">
         <div class="layui-inline">
@@ -86,6 +105,14 @@
 </form>
 </div>
 <script src="../layui/layui.js" charset="utf-8"></script>
+
+<script th:inline="javascript">
+    var idle = [[${config.idle}]];
+    var idletime = [[${config.idletime}]];
+    var cload = [[${config.cload}]];
+    var csize = [[${config.csize}]];
+    var path = [[${config.path}]];
+</script>
 
 <script>
     layui.use(['form', 'layedit', 'laydate'], function(){
@@ -139,15 +166,13 @@
         // });
 
         // //表单初始赋值
-        // form.val('example', {
-        //     "idle": "90" // "name": "value"
-        //     ,"password": "123456"
-        //     ,"interest": 1
-        //     ,"like[write]": true //复选框选中状态
-        //     ,"close": true //开关状态
-        //     ,"sex": "女"
-        //     ,"desc": "我爱 layui"
-        // });
+        form.val('demo1', {
+            "idle": idle // "name": "value"
+            ,"idletime": idletime
+            ,"cload": cload
+            ,"csize":csize
+            ,"path":path
+        });
 
 
     });

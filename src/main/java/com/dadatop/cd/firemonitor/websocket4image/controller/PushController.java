@@ -127,6 +127,20 @@ public class PushController {
 
     @RequestMapping("config")
     public String  config(Model model) {
+
+        List<Config> cs = configService.findAll();
+        if(cs!=null && cs.size()>0){
+            model.addAttribute("config",cs.get(0));
+        }else {
+            Config c = new Config();
+            c.setIdle(90);
+            c.setIdletime(5);
+            c.setCload(1);
+            c.setPath("images/");
+            c.setCsize(80);
+            model.addAttribute("config",c);
+        }
+
         if(dev){
             return "/push/config";
         }
