@@ -18,8 +18,8 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/fire_push
     username: root
-    password: woaini123
-#    password: root123456
+#    password: woaini123
+    password: root123456
     driver-class-name: com.mysql.jdbc.Driver
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
