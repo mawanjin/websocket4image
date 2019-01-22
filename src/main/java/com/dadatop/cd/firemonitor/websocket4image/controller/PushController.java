@@ -22,7 +22,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/push")
 public class PushController {
-    boolean dev = true;
+    boolean dev = false;
 
     @Resource
     private PushService pushService;
@@ -96,7 +96,7 @@ public class PushController {
         String path = "D:\\images\\";
         Push p = pushService.getPushById(id);
         if(p!=null){
-            path += p.getFileName();
+            path += System.currentTimeMillis()+"_"+p.getFileName();
         }
 
         try {
