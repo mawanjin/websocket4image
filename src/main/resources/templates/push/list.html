@@ -46,6 +46,17 @@
                 }
             });
 
+            $("#btnPic").bind('click',function(){
+                window.location = "/push/";
+            });
+
+            $("#btnPushList").bind('click',function(){
+                window.location = "/push/list";
+            });
+
+            $("#btnConfig").bind('click',function(){
+                window.location = "/push/config";
+            });
 
 
         });
@@ -88,12 +99,30 @@
         if(message)
         layer.msg(message);
     </script>
+
+
+
 </head>
 <body>
 
+
+<div style="position: absolute;top: 100px;left: 100px;">
+    <div class="container">
+        <div class="row">
+
+            <div class="col">
+                <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                    <button id="btnPic" type="button" class="btn btn-secondary">图片上传</button>
+                    <button id="btnPushList" type="button" class="btn btn-secondary">推送列表</button>
+                    <button id="btnConfig" type="button" class="btn btn-secondary">配置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
-
         <div class="col">
             <div class="jumbotron" style="margin-top: 20px;padding: 20px;">
                 <h1 class="display-4">推送</h1>

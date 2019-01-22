@@ -2,6 +2,7 @@ package com.dadatop.cd.firemonitor.websocket4image.controller;
 
 import com.dadatop.cd.firemonitor.websocket4image.entity.Push;
 import com.dadatop.cd.firemonitor.websocket4image.service.PushService;
+import com.dadatop.cd.firemonitor.websocket4image.util.FileUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.ClassUtils;
@@ -31,13 +32,20 @@ public class UploadController {
     public String upload(@RequestParam("fileList") MultipartFile multipartFile){
 
         //user_upload
-        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath()+"/static/upload/images/";
+//        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath()+"/static/upload/images/";
+        String path = uploadDir;
         if(!new File(path).exists()){
             new File(path).mkdirs();
         }
 
         String oFileName = multipartFile.getOriginalFilename();
-        String newName = UUID.randomUUID().toString();
+        String sufix = ".jpg";
+
+        if(oFileName.contains(".")){
+            sufix = oFileName.substring(oFileName.lastIndexOf("."));
+        }
+
+        String newName = UUID.randomUUID().toString()+sufix;
         File file = new File(path,newName);
         try {
             multipartFile.transferTo(file);
@@ -55,7 +63,25 @@ public class UploadController {
 
         pushService.addPush(push);
 
-        return file.getAbsolutePath();
+        //保存到D:/images/下
+        String targetPath = "D:\\images\\";
+//        String targetPath = "/Users/lala/Documents/bbb/";
+
+        try {
+            File fout = new File(targetPath+System.currentTimeMillis()+"_"+newName);
+
+            if(!fout.exists()){
+                fout.createNewFile();
+            }else {
+                fout.delete();
+            }
+            FileUtil.CopyFile(file,fout);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return file.getAbsolutePath()+";and push success.";
     }
 
 }

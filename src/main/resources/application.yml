@@ -8,7 +8,6 @@ mybatis:
   typeAliasesPackage: com.dadatop.cd.firemonitor.websocket4image.entity
   mapperLocations: classpath:mapper/*.xml
 
-
 ---
 
 #开发配置
@@ -16,7 +15,7 @@ spring:
   profiles: dev
 
   datasource:
-    url: jdbc:mysql://localhost:3306/fire_push
+    url: jdbc:mysql://localhost:3306/fire_push?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
 #    password: woaini123
     password: root123456

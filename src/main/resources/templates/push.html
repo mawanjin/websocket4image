@@ -2,6 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="../bootstrap.min.css">
+
+
     <!-- 引用控制层插件样式 -->
 
     <link rel="stylesheet" href="../upload/control/css/zyUpload.css" type="text/css">
@@ -20,11 +24,45 @@
 
     <script src="../upload/core/jq22.js"></script>
 
+    <script src="../bootstrap.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            $("#btnPic").bind('click',function(){
+                window.location = "/push/";
+            });
+
+            $("#btnPushList").bind('click',function(){
+                window.location = "/push/list";
+            });
+
+            $("#btnConfig").bind('click',function(){
+                window.location = "/push/config";
+            });
+        });
+    </script>
+
+
 </head>
 
 <body>
 
-<h1 style="text-align:center;">PUSH</h1>
+<h1 style="text-align:center;">图片上传&推送</h1>
+
+
+<div class="container">
+    <div class="row">
+
+        <div class="col">
+            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                <button id="btnPic" type="button" class="btn btn-secondary">图片上传</button>
+                <button id="btnPushList" type="button" class="btn btn-secondary">推送列表</button>
+                <button id="btnConfig" type="button" class="btn btn-secondary">配置</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <div id="demo" class="demo"></div>
 

@@ -1,5 +1,6 @@
 package com.dadatop.cd.firemonitor.websocket4image.controller;
 
+import com.alibaba.druid.util.StringUtils;
 import com.dadatop.cd.firemonitor.websocket4image.entity.Config;
 import com.dadatop.cd.firemonitor.websocket4image.entity.Push;
 import com.dadatop.cd.firemonitor.websocket4image.service.ConfigService;
@@ -45,16 +46,30 @@ public class PushController {
         if(dev){
             return "/push/list";
         }
-
         return "push/list";
     }
 
     @RequestMapping("del")
     public String del(@RequestParam(name = "id")int id,Page page,Model model,RedirectAttributes attributes){
-        pushService.del(id);
+        String message = "操作成功";
+        try {
+            pushService.del(id);
+            Push push = pushService.getPushById(id);
+            if(push!=null){
+                String pic = push.getAbPath();
+                if(!StringUtils.isEmpty(pic)){
+                    File p = new File(pic);
+                    if(p.exists())p.delete();
+                }
+            }
+
+        }catch (Exception e){
+            message = "操作失败";
+            e.printStackTrace();
+        }
         attributes.addAttribute("pageNo",page.getPageNo());
         attributes.addAttribute("pageSize",page.getPageSize());
-        attributes.addAttribute("message","操作成功");
+        attributes.addAttribute("message",message);
         return "redirect:list";
     }
 
