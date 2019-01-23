@@ -22,3 +22,8 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     # 使用druid数据源
     type: com.alibaba.druid.pool.DruidDataSource
+
+  multipart:
+      enabled: true
+      max-request-size: 50mb
+      max-file-size: 50mb
