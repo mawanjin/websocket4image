@@ -14,7 +14,7 @@
 		return this.each(function(){
 			var para = {};    // 保留参数
 			var self = this;  // 保存组件对象
-			
+			var lastFile;//上次的文件
 			var defaults = {
 					width            : "700px",  					// 宽度
 					height           : "400px",  					// 宽度
@@ -246,6 +246,14 @@
 						return self.funFilterEligibleFile(files);
 					},
 					onSelect: function(selectFiles, allFiles) {
+						if(self.lastFile){
+                            // 移除效果
+                            $("#uploadList_" + self.lastFile.index).fadeOut();
+                            // 重新设置统计栏信息
+                            // self.funSetStatusInfo(ZYFILE.funReturnNeedFiles());
+						}
+
+
 						para.onSelect(selectFiles, allFiles);  // 回调方法
 						self.funSetStatusInfo(ZYFILE.funReturnNeedFiles());  // 显示统计信息
 						var html = '', i = 0;
@@ -331,6 +339,7 @@
 						eleProgress.css("width",percent);
 					},
 					onSuccess: function(file, response) {
+						self.lastFile = file;
 						$("#uploadProgress_" + file.index).hide();
 						$("#uploadSuccess_" + file.index).show();
 						$("#uploadInf").append("<p><font color='red'>推送成功!</font>文件地址是：" + response + "</p>");
