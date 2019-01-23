@@ -22,7 +22,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/push")
 public class PushController {
-    boolean dev = false;
+    boolean dev = true;
 
     @Resource
     private PushService pushService;

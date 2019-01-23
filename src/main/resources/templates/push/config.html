@@ -18,9 +18,9 @@
                 window.location = "/push/";
             });
 
-            $("#btnPushList").bind('click',function(){
-                window.location = "/push/list";
-            });
+            // $("#btnPushList").bind('click',function(){
+            //     window.location = "/push/list";
+            // });
 
             $("#btnConfig").bind('click',function(){
                 window.location = "/push/config";
@@ -37,7 +37,7 @@
             <div class="col">
                 <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
                     <button id="btnPic" type="button" class="btn btn-secondary">图片上传</button>
-                    <button id="btnPushList" type="button" class="btn btn-secondary">推送列表</button>
+                    <!--<button id="btnPushList" type="button" class="btn btn-secondary">推送列表</button>-->
                     <button id="btnConfig" type="button" class="btn btn-secondary">配置</button>
                 </div>
             </div>
@@ -62,13 +62,13 @@
 
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">idle:</label>
+            <label class="layui-form-label">推送:</label>
             <div class="layui-input-inline">
                 <input type="text" name="idle" lay-verify="idle" autocomplete="off" placeholder="请输入idle值" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">idletime:</label>
+            <label class="layui-form-label">背景:</label>
             <div class="layui-input-inline">
                 <input type="text" name="idletime" lay-verify="idletime" autocomplete="off" placeholder="请输入idletime值" class="layui-input">
             </div>
@@ -89,7 +89,7 @@
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">csize:</label>
+            <label class="layui-form-label">像素:</label>
             <div class="layui-input-inline">
                 <input type="text" name="csize" lay-verify="csize" autocomplete="off" placeholder="请输入size值" class="layui-input">
             </div>
