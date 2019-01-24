@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.dadatop.cd.firemonitor</groupId>
     <artifactId>websocket4image</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.5-SNAPSHOT</version>
     <name>websocket4image</name>
     <description>websocket4image</description>
 
@@ -38,7 +38,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
             <!--打包时，打开下面的注释-->
-            <!--<scope>provided</scope>-->
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
